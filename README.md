@@ -19,28 +19,21 @@ This repository contains a collection of mini-projects that demonstrate the impl
 
 ## ✨ Features
 
-- **Animal Sound Simulator:** Simulate the sounds of various animals using OOP concepts.
-- **Bank Account Simulator:** Manage user accounts with functionalities like balance checking, depositing, and withdrawing.
-- **Employee Management System:** Create and manage employee records with functionalities like adding and updating personal and professional information.
-- **Inventory Management System:** Manage inventory items, track quantities, and perform operations like adding and removing items.
-- **Library Management System:** Manage a collection of books, borrowing and returning books, and tracking due dates.
-- **Secure User Profile App:** Create and manage user profiles with secure login and password management.
-- **Mini ATM Machine App:** Simulate an ATM machine with functionalities like account creation, PIN validation, and transaction processing.
+- Convert `.md` Markdown files to clean and styled HTML.
+- Built-in HTML template with basic styling (headings, links, body text).
+- Command-line interaction to select input/output paths.
+- Lightweight and easy to run – uses only one external package (markdown2).
+- Clean and maintainable Python source code.
 
 ---
 
 ## 🗂️ Repository Structure
 ```
-├── Animal_Sound_Simulator/ # Folder for Animal Sound Simulator project
-├── Bank_Account_Simulator/ # Folder for Bank Account Simulator project
-├── Employee_Management_System/ # Folder for Employee Management System project
-├── Inventory_Management_System/ # Folder for Inventory Management System project
-├── Library_Management_System/ # Folder for Library Management System project
-├── Secure_UserProfile_App/ # Folder for Secure UserProfile App project
-├── miniATM_Machine_App/ # Folder for Mini ATM Machine App project
-└── README.md # Project documentation
+├── Markdown-to-HTML_converter.py   # Main script to run the converter
+├── requirements.txt                # List of dependencies
+├── sample-markdown.md             # Sample markdown file to test with
+└── README.md                      # Project documentation
 └── LICENSE
-
 ```
 ---
 
