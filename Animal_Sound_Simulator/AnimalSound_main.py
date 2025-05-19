@@ -1,79 +1,77 @@
+# 🧬 Base entity class
+class Animal:
+    def make_sound(self):
+        print("🔈 Some mysterious creature makes a sound...")
 
-# Base class
-class Creature:
-    def speak(self):
-        print("An unknown creature makes a noise...")
+# 🐾 Derived animal classes with specific behaviors
+class Dog(Animal):
+    def make_sound(self):
+        print("🐶 Dog barks: Woof woof!")
 
-# Derived classes
-class Hound(Creature):
-    def speak(self):
-        print("🐶 Hound says: Bark bark!")
+class Cat(Animal):
+    def make_sound(self):
+        print("🐱 Cat meows: Meow meow!")
 
-class Feline(Creature):
-    def speak(self):
-        print("🐱 Feline says: Meow meow!")
+class Cow(Animal):
+    def make_sound(self):
+        print("🐄 Cow moos: Moo moo!")
 
-class Bovine(Creature):
-    def speak(self):
-        print("🐄 Bovine says: Moo moo!")
+class Duck(Animal):
+    def make_sound(self):
+        print("🦆 Duck quacks: Quack quack!")
 
-class Quacker(Creature):
-    def speak(self):
-        print("🦆 Quacker says: Quack quack!")
-
-# Simulator class
-class VoiceSimulator:
+# 🔊 Sound board controller
+class SoundBoard:
     def __init__(self):
-        self.creature_list = []
+        self.animal_queue = []
 
-    def insert_creature(self, creature):
-        if isinstance(creature, Creature):
-            self.creature_list.append(creature)
-            print(f"{creature.__class__.__name__} has joined the voice simulator.")
+    def add_animal(self, animal: Animal):
+        if isinstance(animal, Animal):
+            self.animal_queue.append(animal)
+            print(f"✅ {animal.__class__.__name__} was added to the sound board.")
         else:
-            print("❌ This object is not a valid creature!")
+            print("❌ Error: Only animals can be added to the sound board.")
 
-    def play_all_sounds(self):
-        if not self.creature_list:
-            print("📭 No creatures in the simulator yet.")
+    def play_sounds(self):
+        if not self.animal_queue:
+            print("📭 The sound board is empty. Add some animals first!")
             return
-        print("\n🔊 All Creatures Make Sounds:")
-        for creature in self.creature_list:
-            creature.speak()
+        print("\n🎵 All animals are making sounds:")
+        for creature in self.animal_queue:
+            creature.make_sound()
 
-
-# Console Interface
-def run_voice_console():
-    sim = VoiceSimulator()
+# 🎮 Simple console-based interaction
+def launch_soundboard_console():
+    board = SoundBoard()
 
     while True:
-        print("\n===== 🐾 Creature Voice Console =====")
-        print("1. Add Hound")
-        print("2. Add Feline")
-        print("3. Add Bovine")
-        print("4. Add Quacker")
-        print("5. Play All Voices")
-        print("6. Exit")
+        print("\n===== 🎤 Animal SoundBoard Menu =====")
+        print("1. Add a Dog")
+        print("2. Add a Cat")
+        print("3. Add a Cow")
+        print("4. Add a Duck")
+        print("5. Play All Animal Sounds")
+        print("6. Exit Program")
 
-        user_input = input("Choose an action (1–6): ").strip()
+        choice = input("Enter your choice (1–6): ").strip()
 
-        if user_input == '1':
-            sim.insert_creature(Hound())
-        elif user_input == '2':
-            sim.insert_creature(Feline())
-        elif user_input == '3':
-            sim.insert_creature(Bovine())
-        elif user_input == '4':
-            sim.insert_creature(Quacker())
-        elif user_input == '5':
-            sim.play_all_sounds()
-        elif user_input == '6':
-            print("👋 Exiting simulator. Have a nice day!")
-            break
-        else:
-            print("⚠️ Invalid selection. Please choose again.")
+        match choice:
+            case '1':
+                board.add_animal(Dog())
+            case '2':
+                board.add_animal(Cat())
+            case '3':
+                board.add_animal(Cow())
+            case '4':
+                board.add_animal(Duck())
+            case '5':
+                board.play_sounds()
+            case '6':
+                print("👋 Goodbye! Thanks for playing.")
+                break
+            case _:
+                print("⚠️ Invalid option. Please select a number between 1 and 6.")
 
-
-# Run the application
+# 🚀 Entry point
 if __name__ == "__main__":
-    run_voice_console()
+    launch_soundboard_console()
