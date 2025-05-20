@@ -1,97 +1,103 @@
-class Account:
-    def __init__(self, owner_name, start_balance=0.0):
-        self.owner_name = owner_name
-        self.balance = start_balance
+class BankAccount:
+    def __init__(self, name, opening_balance=0.0):
+        self.name = name
+        self.balance = opening_balance
 
-    def add_funds(self, amount):
+    def deposit(self, amount):
         if amount > 0:
             self.balance += amount
-            print(f"Added ${amount:.2f}. Current balance: ${self.balance:.2f}")
+            print(f">> Deposited: ${amount:.2f}")
+            print(f"   New Balance: ${self.balance:.2f}")
         else:
-            print("Amount must be positive!")
+            print(">> Error: Deposit must be positive.")
 
-    def take_funds(self, amount):
+    def withdraw(self, amount):
         if amount > 0:
             if amount <= self.balance:
                 self.balance -= amount
-                print(f"Withdrawn ${amount:.2f}. Remaining balance: ${self.balance:.2f}")
+                print(f">> Withdrawn: ${amount:.2f}")
+                print(f"   Remaining Balance: ${self.balance:.2f}")
             else:
-                print("Not enough funds.")
+                print(">> Error: Insufficient balance.")
         else:
-            print("Withdrawal must be greater than zero!")
+            print(">> Error: Amount must be greater than zero.")
 
-    def print_info(self):
-        print("\n[Account Summary]")
-        print(f"Owner: {self.owner_name}")
+    def display_info(self):
+        print("\n=== Account Details ===")
+        print(f"Holder Name: {self.name}")
         print(f"Balance: ${self.balance:.2f}")
 
 
-# Data Store
-account_list = {}
+# Global Account Storage
+user_accounts = {}
 
-def register_account():
-    holder = input("Enter your full name: ").strip()
+
+def create_account():
+    name = input("Enter full name to create account: ").strip()
     try:
-        initial = float(input("Initial deposit amount: "))
+        balance = float(input("Enter opening balance: "))
     except ValueError:
-        print("Invalid input. Start balance set to $0.")
-        initial = 0.0
-    new_acc = Account(holder, initial)
-    account_list[holder] = new_acc
-    print(">> Account successfully created.")
+        print(">> Invalid input. Starting with $0.00.")
+        balance = 0.0
+    user_accounts[name] = BankAccount(name, balance)
+    print(">> New account has been created.")
 
-def login_account():
-    holder = input("Enter account name: ").strip()
-    acc = account_list.get(holder)
-    if acc:
-        while True:
-            print("\n[Account Panel]")
-            print("1. Add Money")
-            print("2. Withdraw Money")
-            print("3. View Account Info")
-            print("4. Logout")
-            action = input("Choose action (1-4): ")
 
-            if action == '1':
-                try:
-                    amt = float(input("Enter amount to deposit: "))
-                    acc.add_funds(amt)
-                except ValueError:
-                    print("Invalid number.")
-            elif action == '2':
-                try:
-                    amt = float(input("Enter amount to withdraw: "))
-                    acc.take_funds(amt)
-                except ValueError:
-                    print("Invalid number.")
-            elif action == '3':
-                acc.print_info()
-            elif action == '4':
-                print("Logging out...")
-                break
-            else:
-                print("Invalid option.")
-    else:
-        print("Account not found.")
+def access_account():
+    name = input("Enter your account name: ").strip()
+    account = user_accounts.get(name)
+    if not account:
+        print(">> No matching account found.")
+        return
 
-# App Menu
-def run_simulator():
     while True:
-        print("\n=== Welcome to SimpleBank ===")
-        print("1. Open New Account")
-        print("2. Access Existing Account")
-        print("3. Exit")
-        option = input("Select (1-3): ")
+        print("\n--- Account Menu ---")
+        print("1. Deposit Funds")
+        print("2. Withdraw Funds")
+        print("3. Show Account Info")
+        print("4. Return to Main Menu")
+        choice = input("Select option (1-4): ")
 
-        if option == '1':
-            register_account()
-        elif option == '2':
-            login_account()
-        elif option == '3':
-            print("Thanks for using SimpleBank. Goodbye!")
+        if choice == '1':
+            try:
+                amount = float(input("Enter amount to deposit: "))
+                account.deposit(amount)
+            except ValueError:
+                print(">> Invalid input. Must be a number.")
+        elif choice == '2':
+            try:
+                amount = float(input("Enter amount to withdraw: "))
+                account.withdraw(amount)
+            except ValueError:
+                print(">> Invalid input. Must be a number.")
+        elif choice == '3':
+            account.display_info()
+        elif choice == '4':
+            print("Returning to main menu...")
             break
         else:
-            print("Please select a valid option.")
+            print(">> Invalid selection.")
 
-# Start App
-run_simulator()
+
+def launch_bank_app():
+    while True:
+        print("\n==== MiniBank System ====")
+        print("1. Create New Account")
+        print("2. Login to Account")
+        print("3. Quit")
+        main_choice = input("Choose (1-3): ")
+
+        if main_choice == '1':
+            create_account()
+        elif main_choice == '2':
+            access_account()
+        elif main_choice == '3':
+            print(">> Thank you for banking with us!")
+            break
+        else:
+            print(">> Invalid input. Please try again.")
+
+
+# Launch app
+if __name__ == "__main__":
+    launch_bank_app()
