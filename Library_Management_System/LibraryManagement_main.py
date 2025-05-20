@@ -1,3 +1,6 @@
+# Nguyen Cong Phat 
+# Github: https://github.com/paht2005
+
 class Publication:
     def __init__(self, name, writer):
         self.name = name

@@ -1,117 +1,117 @@
 import sys
 
-# Core Product Class
-class StockItem:
-    _global_count = 0
+# Product Base Class
+class Product:
+    _total_inventory = 0
 
-    def __init__(self, name, unit_price, stock_qty):
-        self.name = name
-        self.unit_price = unit_price
-        self.stock_qty = stock_qty
-        StockItem._global_count += stock_qty
+    def __init__(self, title, price, quantity):
+        self.title = title
+        self.price = price
+        self.quantity = quantity
+        Product._total_inventory += quantity
 
-    def display_info(self):
-        print("\n📦 Item Information")
-        print(f"Name     : {self.name}")
-        print(f"Price    : {self.unit_price}")
-        print(f"In Stock : {self.stock_qty}")
+    def show_details(self):
+        print("\n📦 Product Details")
+        print(f"📝 Name     : {self.title}")
+        print(f"💵 Price    : {self.price}")
+        print(f"📦 In Stock : {self.quantity}")
 
-    def process_sale(self, qty):
-        if qty <= self.stock_qty:
-            self.stock_qty -= qty
-            StockItem._global_count -= qty
-            print(f"✅ Sold {qty} unit(s) of {self.name}")
+    def sell(self, amount):
+        if amount <= self.quantity:
+            self.quantity -= amount
+            Product._total_inventory -= amount
+            print(f"✅ {amount} unit(s) of '{self.title}' sold.")
         else:
-            print("❌ Not enough stock available.")
+            print("⚠️ Insufficient stock available.")
 
     @staticmethod
-    def get_discounted_price(price, percent):
-        return round(price * (1 - percent / 100), 2)
+    def apply_discount(original_price, discount_percent):
+        return round(original_price * (1 - discount_percent / 100), 2)
 
     @classmethod
-    def show_total_stock(cls):
-        print(f"\n📊 Total Units in Inventory: {cls._global_count}")
+    def display_total_inventory(cls):
+        print(f"\n📊 Total Items in Inventory: {cls._total_inventory}")
 
 
-# Application Logic
-class InventoryManager:
+# Inventory Controller
+class Warehouse:
     def __init__(self):
-        self.catalog = []
+        self.items = []
 
-    def register_product(self):
-        print("\n🆕 Register New Product")
-        name = input("Item Name: ")
+    def add_new_product(self):
+        print("\n➕ Add New Product")
+        name = input("Enter product name: ").strip()
         try:
-            price = float(input("Unit Price ($): "))
-            quantity = int(input("Stock Quantity: "))
+            cost = float(input("Enter unit price: ").strip())
+            stock = int(input("Enter quantity in stock: ").strip())
+        except ValueError:
+            print("❌ Invalid number format.")
+            return
+
+        self.items.append(Product(name, cost, stock))
+        print(f"✅ '{name}' ({stock} units) added to warehouse.")
+
+    def show_all_products(self):
+        print("\n📋 Current Product List")
+        if not self.items:
+            print("📭 No products in the warehouse.")
+            return
+        for p in self.items:
+            p.show_details()
+
+    def process_transaction(self):
+        search_name = input("Enter product to sell: ").strip()
+        for p in self.items:
+            if p.title.lower() == search_name.lower():
+                try:
+                    amount = int(input("Quantity to sell: ").strip())
+                    p.sell(amount)
+                except ValueError:
+                    print("❌ Please enter a valid number.")
+                return
+        print("🔍 Product not found in inventory.")
+
+    def calculate_discount(self):
+        try:
+            original = float(input("Original price: ").strip())
+            discount = float(input("Discount percentage: ").strip())
+            final = Product.apply_discount(original, discount)
+            print(f"💰 Final price after {discount}% off: {final}")
         except ValueError:
             print("❌ Invalid input.")
-            return
-        self.catalog.append(StockItem(name, price, quantity))
-        print(f"✅ {quantity} unit(s) of '{name}' added to inventory.")
 
-    def list_products(self):
-        print("\n📦 Product List")
-        if not self.catalog:
-            print("⚠️ No items available.")
-            return
-        for item in self.catalog:
-            item.display_info()
-
-    def handle_sale(self):
-        item_name = input("Enter item name to sell: ")
-        for item in self.catalog:
-            if item.name.lower() == item_name.lower():
-                try:
-                    qty = int(input("Quantity to sell: "))
-                    item.process_sale(qty)
-                except ValueError:
-                    print("❌ Quantity must be an integer.")
-                return
-        print("❌ Item not found in catalog.")
-
-    def compute_discount(self):
-        try:
-            price = float(input("Enter original price: "))
-            percent = float(input("Enter discount %: "))
-            result = StockItem.get_discounted_price(price, percent)
-            print(f"💸 Final Price after {percent}% discount: {result}")
-        except ValueError:
-            print("❌ Invalid numeric input.")
-
-    def menu(self):
-        options = {
-            "1": self.register_product,
-            "2": self.list_products,
-            "3": self.handle_sale,
-            "4": self.compute_discount,
-            "5": StockItem.show_total_stock,
-            "6": self.exit_program,
+    def run_menu(self):
+        choices = {
+            "1": self.add_new_product,
+            "2": self.show_all_products,
+            "3": self.process_transaction,
+            "4": self.calculate_discount,
+            "5": Product.display_total_inventory,
+            "6": self.quit_app,
         }
 
         while True:
-            print("\n====== 🛒 Inventory Menu ======")
-            print("1. Add Item")
-            print("2. View Items")
-            print("3. Sell Item")
-            print("4. Discount Calculator")
-            print("5. View Total Stock")
+            print("\n====== 🧮 Warehouse Console ======")
+            print("1. Add New Product")
+            print("2. List All Products")
+            print("3. Sell a Product")
+            print("4. Discount Tool")
+            print("5. View Inventory Summary")
             print("6. Exit")
 
-            choice = input("Select option (1–6): ").strip()
-            action = options.get(choice)
-
-            if action:
-                action()
+            user_input = input("Your choice (1–6): ").strip()
+            selected = choices.get(user_input)
+            if selected:
+                selected()
             else:
-                print("❌ Invalid choice. Try again.")
+                print("❌ Unknown option. Please choose again.")
 
-    def exit_program(self):
-        print("👋 Closing Inventory Manager. Goodbye!")
-        sys.exit(0)
+    def quit_app(self):
+        print("👋 Exiting Warehouse System. See you soon!")
+        sys.exit()
 
 
-# Launch App
+# Start Program
 if __name__ == "__main__":
-    app = InventoryManager()
-    app.menu()
+    system = Warehouse()
+    system.run_menu()

@@ -1,3 +1,6 @@
+# Nguyen Cong Phat 
+# Github: https://github.com/paht2005
+
 # === SimpleBank ATM Simulation ===
 #
 # System Features:
