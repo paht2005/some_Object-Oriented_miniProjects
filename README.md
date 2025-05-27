@@ -55,7 +55,7 @@ This repository contains a collection of mini-projects that demonstrate the impl
 - For example, to run the Mini ATM Machine App:
    ```bash
    cd miniATM_Machine_App
-   python3 miniATM-machine_main.py
+   python3 miniATM-machine_main.py # or python miniATM-machine_main.py
    ```
 ---
 ## 🎯 Usage
