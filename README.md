@@ -4,20 +4,20 @@ This repository contains a collection of mini-projects that demonstrate the impl
 
 ---
 
-## 🗂️ Table of Contents
+## Table of Contents
 
-- [✨ Features](#-features)
-- [🗂️ Repository Structure](#️-repository-structure)
-- [⚙️ Installation](#️-installation)
-- [🎯 Usage](#-usage)
-- [📄 License](#-license)
-- [🤝 Contributing](#-contributing)
-- [🧠 Acknowledgements](#-acknowledgements)
-- [⭐ Future Enhancements](#-future-enhancements)
+- [Features](#-features)
+- [Repository Structure](#️-repository-structure)
+- [Installation](#️-installation)
+- [Usage](#-usage)
+- [License](#-license)
+- [Contributing](#-contributing)
+- [Acknowledgements](#-acknowledgements)
+- [Future Enhancements](#-future-enhancements)
 
 ---
 
-## ✨ Features
+## Features
 
 - **Animal Sound Simulator:** Simulate the sounds of various animals using OOP concepts.
 - **Bank Account Simulator:** Manage user accounts with functionalities like balance checking, depositing, and withdrawing.
@@ -29,7 +29,7 @@ This repository contains a collection of mini-projects that demonstrate the impl
 
 ---
 
-## 🗂️ Repository Structure
+## Repository Structure
 ```
 ├── Animal_Sound_Simulator/ # Folder for Animal Sound Simulator project
 ├── Bank_Account_Simulator/ # Folder for Bank Account Simulator project
@@ -44,7 +44,7 @@ This repository contains a collection of mini-projects that demonstrate the impl
 ```
 ---
 
-## ⚙️ Installation
+## Installation
 
 1. **Clone the repository:**
    ```bash
@@ -58,17 +58,17 @@ This repository contains a collection of mini-projects that demonstrate the impl
    python3 miniATM-machine_main.py # or python miniATM-machine_main.py
    ```
 ---
-## 🎯 Usage
+## Usage
 - Choose any project from the repository to run.
 - Follow the interactive prompts in each project to simulate the functionalities of the system.
 - Each project contains basic functionality with additional enhancements possible based on the project.
 
 ---
-## 📄 License
+## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
-## 🤝 Contributing
+## Contributing
 I welcome contributions to improve this project!
 Feel free to:
 - Submit pull requests
@@ -76,7 +76,7 @@ Feel free to:
 - Suggest new features
 Contact for work: **Nguyễn Công Phát** – congphatnguyen.work@gmail.com
 ---
-## 🧠 Acknowledgements
+## Acknowledgements
 - **Python:** For providing a simple yet powerful language for OOP projects.
 - **GitHub:** For hosting this open-source project.
 - **Streamlit/Tkinter:** Developing a user interface (UI) using Tkinter or Streamlit frameworks.
